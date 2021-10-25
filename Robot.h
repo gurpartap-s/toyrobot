@@ -24,7 +24,8 @@ public:
 
 	void Right();
 
-	void Report();
+	Position Report();
+
 private:
 	bool StringToDirection(Position& p, std::string inp);
 	bool convertToPosition(Position& p, std::string x, std::string y, std::string facing);

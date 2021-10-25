@@ -9,6 +9,8 @@
 
 using namespace std;
 
+extern std::vector<std::string> dirEnumStrings;
+
 vector<string> tokenize(const string& line, const string& delims)
 {
     vector<string> tokens;
@@ -64,7 +66,8 @@ int main()
 
     while (getline(infile, line)) {
         auto tokens = tokenize(line, delims);
-
+        if (tokens.size() == 0)
+            continue;
         if (!_stricmp(tokens[0].c_str(), "PLACE")) {
             if (tokens.size() < 4) {
                 cout << "Incorrect PLACE command format" << endl;
@@ -83,7 +86,10 @@ int main()
             rb.Right();
         }
         else if (!_stricmp(tokens[0].c_str(), "REPORT")) {
-            rb.Report();
+            auto pos = rb.Report();
+            if (pos.x != -1) {
+                cout << pos.x << "," << pos.y << "," << dirEnumStrings[static_cast<int>(pos.facing)] << endl;
+            }
         }
         else {
             cout << "Unsupported command" << endl;

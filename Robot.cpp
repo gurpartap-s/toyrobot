@@ -3,7 +3,8 @@
 
 using namespace std;
 
-vector<string> dirEnumStrings = { "North", "East", "South", "West" };
+std::vector<std::string> dirEnumStrings = { "North", "East", "South", "West" };
+
 const int MinPos = 0;
 const int MaxPos = 4;
 
@@ -102,12 +103,9 @@ void Robot::Right() {
 	mCurrentPosition.facing = static_cast<Direction>(dir);
 }
 
-void Robot::Report() {
+Position Robot::Report() {
 	if (!mIsRobotPlaced) {
-		return;
+		return {-1, -1, Direction::North};
 	}
-
-	cout << mCurrentPosition.x << "," 
-		<< mCurrentPosition.y << "," 
-		<< dirEnumStrings[static_cast<int>(mCurrentPosition.facing)] << endl;
+	return mCurrentPosition;
 }
